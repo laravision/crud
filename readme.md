@@ -61,7 +61,7 @@ php artisan make:crud Admin/Post
 
 ## License
 
-Laravision Crud is free software distributed under the terms of the MIT license.
+Laravision Crud is free and open-sourced software distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Note 
 
