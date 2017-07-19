@@ -63,7 +63,7 @@ for more details about this package :
 ```shell
 php artisan make:crud -h
 ```
-[![Laravision Crud](https://s25.postimg.org/ynosisilb/crud1-help.png)]
+[Laravision Crud help](https://s25.postimg.org/ynosisilb/crud1-help.png)
 
 ## License
 
