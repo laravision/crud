@@ -62,9 +62,8 @@ for more details about this package :
 
 ```shell
 php artisan make:crud -h
-```
-[Laravision Crud help](https://s25.postimg.org/ynosisilb/crud1-help.png)
-
+``` 
+[![Laravision Crud help](https://s25.postimg.org/ynosisilb/crud1-help.png)](https://github.com/laravision/crud/)
 ## License
 
 Laravision Crud is free and open-sourced software distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
