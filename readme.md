@@ -69,11 +69,11 @@ php artisan make:crud -h
 
 Laravision Crud is free and open-sourced software distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
-**Code By  [Marwen Hlaoui](https://marwenhlaoui.me)**
-
 ## Note 
 
 Please report any issue you find in the issues page.  
 Pull requests are welcome.
+
+**Code By  [Marwen Hlaoui](https://marwenhlaoui.me)**
 
 
