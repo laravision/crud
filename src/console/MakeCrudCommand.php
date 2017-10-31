@@ -42,9 +42,8 @@ class MakeCrudCommand extends Command
      */
     public function handle()
     { 
-        $ctr    = $this->createController();
-        $name   = $this->createViews();  
-        $this->helpData($ctr,$name); 
+        $this->createController();
+        $this->createViews(); 
         //dd($this->arguments());
     }
 
@@ -57,14 +56,13 @@ class MakeCrudCommand extends Command
     protected function createController()
     { 
         //$controller = Str::studly(class_basename($this->argument('name'))).'Controller';  
-        $controller = ucfirst($this->argument('name').'Controller');  
+        $controller = $this->argument('name').'Controller';  
 
         $this->call('make:controller', [
             'name' => $controller,
             '--resource'=>true, 
             '--model' => $this->option('model') ? $this->option('model') : null,
-        ]); 
-        return $controller; 
+        ]);  
     }
 
     /**
@@ -88,42 +86,7 @@ class MakeCrudCommand extends Command
             file_put_contents($path,$contents);
         } 
         $this->info(ucfirst($name).' views created successfully.'); 
-        return $name;
-    }
-
-    /**
-     * Generate help data
-     *
-     * @return void
-     */
-    protected function helpData($controller,$name)
-    {  
-        $controller = str_replace("/","\\",$controller);
-        /* route */ 
-        $this->line("\nRoute :"); 
-        $this->comment("  Route::resource('".$name."','".$controller."');");
-
-    }
-
-
-    /**
-     * progress bar
-     */
-    protected function progressBar()
-    {  
-        $this->output->progressStart(10);
-
-        for ($i = 0; $i < 10; $i++) {
-            sleep(1);
-
-            $this->output->progressAdvance();
-        }
-
-        $this->output->progressFinish();
-    }
-
-
-
+    } 
 
 
 }

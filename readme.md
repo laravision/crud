@@ -7,7 +7,7 @@
 Quickly build crud system , controller , models and views using Laravel 5. 
 This package expects that you are using Laravel 5.1 or above.
 
-[![Laravision Crud](https://s25.postimg.org/xmojto1lr/crud2.png)](https://github.com/laravision/crud/)
+[![Laravision Crud](https://s25.postimg.org/3vy0o6g0v/crud1.png)](https://github.com/laravision/crud/)
 
 ## Install
 
@@ -57,13 +57,8 @@ php artisan make:crud post --view=admin/post
 ```shell
 php artisan make:crud Admin/Post
 ```
-## Help
-for more details about this package :
 
-```shell
-php artisan make:crud -h
-``` 
-[![Laravision Crud help](https://s25.postimg.org/ynosisilb/crud1-help.png)](https://github.com/laravision/crud/)
+
 ## License
 
 Laravision Crud is free and open-sourced software distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
@@ -72,7 +67,5 @@ Laravision Crud is free and open-sourced software distributed under the terms of
 
 Please report any issue you find in the issues page.  
 Pull requests are welcome.
-
-**Code By  [Marwen Hlaoui](https://marwenhlaoui.me)**
 
 
