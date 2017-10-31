@@ -81,9 +81,11 @@ class MakeCrudCommand extends Command
 
         $this->controlCrud();
         $this->alert('     Run new CRUD !     ');
-        $ctr    = $this->writeController();
-        dd($ctr);
-        $view   = $this->createViews();  
+        $this->output->progressStart(3);
+        $ctr    = $this->writeController();  
+        $view   = $this->writeViews(); 
+        sleep(1); 
+        $this->output->progressFinish(); 
         $this->getDetails($ctr,$view);
         $this->getRoute($ctr,$view);
 
@@ -104,7 +106,7 @@ class MakeCrudCommand extends Command
         $this->callSilent('make:controller', [
             'name' => $controller,
             '--resource'=>true, 
-            '--model' => $model ? $model : null,
+            '--model' => $model ? 'Models/'.$model : null,
         ]);  
         sleep(1);
         $this->output->progressAdvance();
@@ -120,10 +122,35 @@ class MakeCrudCommand extends Command
     protected function writeController()
     {    
         $name = str_replace("Controller", "", $this->argument('name'));
-        $model = $this->option('model');
+        $explode = explode('/', $name);
+        $model = $this->option('model'); 
         $controller = ucfirst($name.'Controller'); 
-        $defaultCtr = __Dir__ ;
-        dd($defaultCtr);
+        $view = str_replace('/', '.', (!empty($this->option('view')))?$this->option('view'):strtolower($this->argument('name')));
+        $ctrname = ucfirst(last($explode).'Controller'); 
+        $namespace = str_replace('/', '\\', explode('/'.last($explode), $this->argument('name'))[0]);
+
+        $defaultCtr = file_get_contents(dirname(__DIR__).'/files/defaultController.php'); 
+        $defCtrWithModel = file_get_contents(dirname(__DIR__).'/files/modelController.php'); 
+ 
+        if (!empty($model)) {
+           $this->callSilent('make:model', [
+                'name' => 'Models/'.$model
+            ]);
+           $fileCtr = $this->render($defCtrWithModel,compact(['namespace','ctrname','view','model']));
+        }else{ 
+            $fileCtr = $this->render($defaultCtr,compact(['namespace','ctrname','view']));
+        }
+
+        $dir = app_path('Http/Controllers/'.$namespace);
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        } 
+        $file = str_replace('/', '\\', $dir.'/'.$ctrname.'.php');
+        file_put_contents($file, $fileCtr);
+ 
+        sleep(1);
+        $this->output->progressAdvance();
+        return $controller; 
          
     }
 
@@ -146,6 +173,33 @@ class MakeCrudCommand extends Command
             $path = $dir.'/'.$file.'.blade.php'; 
             $contents = "<h1>".ucfirst($file)." page</h1>";
             file_put_contents($path,$contents);
+        }   
+        
+        sleep(1);
+        $this->output->progressAdvance();
+        return ['name'=>$name,'view'=>$view];
+    }
+
+    /**
+     * Create a views.
+     *
+     * @return array($name,$view)
+     */
+    protected function writeViews()
+    {  
+        $url = $this->argument('name'); 
+        $view = (!empty($this->option('view')))?$this->option('view'):strtolower($url);
+        $name = strtolower(class_basename($url));  
+        $dir = base_path() . '/resources/views/' . $view;  
+        $defaultViews = dirname(__DIR__).'/files/defaultViews';
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        foreach ($this->views as $file) {
+            $blade = '/'.$file.'.blade.php'; 
+            $contents = file_get_contents($defaultViews.$blade);
+            file_put_contents($dir.$blade,$contents);
         }   
         
         sleep(1);
@@ -216,6 +270,21 @@ class MakeCrudCommand extends Command
             }
         }
 
+    }
+
+
+    /**
+     * render controller file
+     */
+    protected function render($file,$data)
+    {   
+        $search = [];
+        $replace = [];
+        foreach ($data as $key => $item) {
+            $search[] = '{{'.$key.'}}';
+            $replace[] = $item;
+        } 
+        return str_replace($search, $replace, $file);
     }
 
 

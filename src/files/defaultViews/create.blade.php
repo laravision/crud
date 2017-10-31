@@ -1,1 +1,1 @@
-<h1>Create Page</h1>
+<h1>Create new item</h1>

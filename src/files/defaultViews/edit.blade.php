@@ -1,1 +1,1 @@
-<h1>Edit Page</h1>
+<h1>Edit {{$item->id}}</h1>

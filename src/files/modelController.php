@@ -5,6 +5,8 @@ namespace App\Http\Controllers\{{namespace}};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\{{model}};
+
 class {{ctrname}} extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class {{ctrname}} extends Controller
      */
     public function index()
     {
-        return view('{{view}}.index');
+        $data = {{model}}::all();
+        return view('{{view}}.index',compact('data'));
     }
 
     /**
@@ -35,7 +38,9 @@ class {{ctrname}} extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new {{model}};
+        $item->save();
+        return redirect()->back();
     }
 
     /**
@@ -46,7 +51,11 @@ class {{ctrname}} extends Controller
      */
     public function show($id)
     {
-        return view('{{view}}.show');
+        $item = {{model}}::find($id);
+        if(!empty($item->id)){
+            return view('{{view}}.show',compact('item'));
+        }
+        return redirect()->back();
     }
 
     /**
@@ -57,7 +66,11 @@ class {{ctrname}} extends Controller
      */
     public function edit($id)
     {
-        return view('{{view}}.edit');
+        $item = {{model}}::find($id);
+        if(!empty($item->id)){
+            return view('{{view}}.edit',compact('item'));
+        }
+        return redirect()->back();
     }
 
     /**
@@ -69,7 +82,9 @@ class {{ctrname}} extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = {{model}}::find($id);
+        $item->save();
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +95,10 @@ class {{ctrname}} extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = {{model}}::find($id);
+        if(!empty($item->id)){
+            $item->delete();
+        }
+        return redirect()->back();
     }
 }
