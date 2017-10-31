@@ -26,7 +26,7 @@ class MakeCrudCommand extends Command
                         {--view= : Crud views parent}';
 
     protected $name = 'make:crud'; 
-    protected $description = 'Create a new crud system'; 
+    protected $description = 'Create a new crud system (v1.1)'; 
 
     public function __construct()
     {
