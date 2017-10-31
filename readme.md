@@ -5,13 +5,13 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/laravision/crud.svg)](https://packagist.org/packages/laravision/crud)
 
 Quickly build crud system , controller , models and views using Laravel 5. 
-This package expects that you are using Laravel 5.1 or above.
+This package expects that you are using Laravel 5.4 or above.
 
 [![Laravision Crud](https://s25.postimg.org/xmojto1lr/crud2.png)](https://github.com/laravision/crud/)
 
 ## Install
 
-In order to install Laravel 5 Laravision Crud :
+In order to install Laravel 5.* Laravision Crud :
 
 1) You will need to import the laravision/crud package via composer:
 
