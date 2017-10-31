@@ -1,4 +1,4 @@
-# Laravision Crud system
+# Laravision Crud system (v1.2)
 
 [![Version](https://img.shields.io/packagist/v/laravision/crud.svg)](https://packagist.org/packages/laravision/crud)
 [![License](https://poser.pugx.org/laravision/crud/license.svg)](https://packagist.org/packages/laravision/crud)
